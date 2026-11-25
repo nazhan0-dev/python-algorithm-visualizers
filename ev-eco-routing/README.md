@@ -1,22 +1,22 @@
 # EV Eco-Routing
 
-**English** | [ภาษาไทย](README.th.md)
+**ภาษาไทย** | [English](README.en.md)
 
-A route planner for electric vehicles in the lower south of Thailand. Pick a start and destination province, set the current battery level, and the app finds the route that uses the least battery with Dijkstra's algorithm, then tells you whether you can make the trip without charging.
+ระบบนำทางสำหรับรถยนต์ไฟฟ้าในภาคใต้ตอนล่าง เลือกจังหวัดต้นทางและปลายทาง ตั้งระดับแบตเตอรี่ปัจจุบัน แล้วโปรแกรมจะหาเส้นทางที่ใช้แบตน้อยที่สุดด้วยอัลกอริทึม Dijkstra พร้อมบอกว่าเดินทางได้โดยไม่ต้องชาร์จหรือไม่
 
-![Route from Trang to Narathiwat](../docs/ev-route-trang-narathiwat.png)
+![เส้นทางจากตรังไปนราธิวาส](../docs/ev-route-trang-narathiwat.png)
 
-## Features
+## ฟีเจอร์
 
-- Lowest-battery route between 7 provinces: Songkhla, Phatthalung, Trang, Satun, Pattani, Yala and Narathiwat
-- Battery slider (0–100%) with a colour-coded charge bar
-- Feasibility check: shows battery used and remaining, or how much is missing if the charge is too low
-- Map drawn with Matplotlib inside the Tkinter window, highlighting the chosen path, direction arrows and the battery cost of every road
-- Input validation for a missing selection or identical start and destination
+- หาเส้นทางที่ใช้แบตน้อยที่สุดระหว่าง 7 จังหวัด: สงขลา พัทลุง ตรัง สตูล ปัตตานี ยะลา และนราธิวาส
+- แถบเลื่อนตั้งระดับแบตเตอรี่ (0–100%) พร้อมแถบแบตเปลี่ยนสีตามระดับ
+- ตรวจความเป็นไปได้: แสดงแบตที่ใช้และที่เหลือ หรือแบตที่ขาดถ้าไม่พอ
+- วาดแผนที่ด้วย Matplotlib ในหน้าต่าง Tkinter ไฮไลต์เส้นทางที่เลือก ลูกศรบอกทิศทาง และค่าแบตของแต่ละเส้นทาง
+- ตรวจสอบข้อมูลนำเข้า เช่น ยังไม่ได้เลือกจังหวัด หรือเลือกต้นทางกับปลายทางซ้ำกัน
 
-## How it works
+## หลักการทำงาน
 
-The road network is a weighted, undirected graph stored as an adjacency list. Each edge weight is the percentage of battery the drive takes.
+เครือข่ายถนนเก็บเป็นกราฟแบบมีน้ำหนักและไม่มีทิศทางในรูป adjacency list โดยน้ำหนักของแต่ละเส้นคือเปอร์เซ็นต์แบตที่ใช้ในการขับ
 
 ```python
 GRAPH = {
@@ -25,32 +25,32 @@ GRAPH = {
 }
 ```
 
-`dijkstra(start, end)` keeps a min-heap of `(cost, node)` pairs:
+ฟังก์ชัน `dijkstra(start, end)` ใช้ min-heap เก็บคู่ `(cost, node)`:
 
-1. Pop the node with the lowest known cost; skip it if already visited.
-2. Stop early once the destination is popped, since its cost is now final.
-3. Relax each neighbour: if `cost + weight` beats its known distance, record it and its predecessor, and push it onto the heap.
-4. Rebuild the path by following predecessors back from the destination.
+1. ดึงโหนดที่มีค่าใช้จ่ายต่ำสุดออกมา ถ้าเคยเยี่ยมแล้วให้ข้าม
+2. หยุดทันทีเมื่อดึงปลายทางออกมาได้ เพราะค่าของปลายทางเป็นค่าสุดท้ายแล้ว
+3. ปรับค่าเพื่อนบ้าน (relax): ถ้า `cost + weight` น้อยกว่าระยะที่รู้อยู่ ให้บันทึกค่าใหม่และโหนดก่อนหน้า แล้วใส่ลง heap
+4. สร้างเส้นทางย้อนกลับจากปลายทางตามโหนดก่อนหน้า
 
-**Complexity:** O((V + E) log V) time and O(V) space, with V provinces and E roads.
+**ความซับซ้อน:** เวลา O((V + E) log V) และพื้นที่ O(V) โดย V คือจำนวนจังหวัด และ E คือจำนวนเส้นทาง
 
-Example results:
+ตัวอย่างผลลัพธ์:
 
-| From → To | Route | Battery |
+| ต้นทาง → ปลายทาง | เส้นทาง | แบตที่ใช้ |
 |---|---|---|
-| Trang → Narathiwat | Trang → Satun → Songkhla → Pattani → Narathiwat | 70% |
-| Phatthalung → Narathiwat | Phatthalung → Songkhla → Pattani → Narathiwat | 50% |
-| Satun → Pattani | Satun → Songkhla → Pattani | 35% |
+| ตรัง → นราธิวาส | ตรัง → สตูล → สงขลา → ปัตตานี → นราธิวาส | 70% |
+| พัทลุง → นราธิวาส | พัทลุง → สงขลา → ปัตตานี → นราธิวาส | 50% |
+| สตูล → ปัตตานี | สตูล → สงขลา → ปัตตานี | 35% |
 
-The battery costs are illustrative values chosen for the course project, not measured consumption data.
+ค่าแบตที่ใช้เป็นค่าสมมติสำหรับโปรเจกต์ในรายวิชา ไม่ใช่ข้อมูลการใช้พลังงานจริง
 
-## Run
+## วิธีรัน
 
 ```bash
 pip install -r ../requirements.txt
 python ev_eco_routing.py
 ```
 
-## Tech
+## เทคโนโลยี
 
-Python · Tkinter · Matplotlib (embedded with `FigureCanvasTkAgg`) · NumPy · `heapq`
+Python · Tkinter · Matplotlib (ฝังด้วย `FigureCanvasTkAgg`) · NumPy · `heapq`

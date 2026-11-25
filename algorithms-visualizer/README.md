@@ -1,29 +1,29 @@
 # Algorithms Visualizer: Sorting & Searching
 
-**English** | [ภาษาไทย](README.th.md)
+**ภาษาไทย** | [English](README.en.md)
 
-A Tkinter app that animates sorting and searching algorithms step by step as coloured bar charts, so you can see each comparison and swap as it happens.
+แอป Tkinter ที่แสดงการทำงานของอัลกอริทึมเรียงลำดับและค้นหาข้อมูลทีละขั้นเป็นกราฟแท่งหลากสี เห็นทุกการเปรียบเทียบและการสลับที่ขณะเกิดขึ้น
 
-> Team mini-project for the Data Structures & Algorithms course (2025).
+> มินิโปรเจกต์กลุ่มในรายวิชาโครงสร้างข้อมูลและอัลกอริทึม (2568)
 
-## Features
+## ฟีเจอร์
 
-**Sorting tab**
-- Bubble Sort, Selection Sort, Insertion Sort and Merge Sort
-- Enter your own numbers (up to 20) or generate random data with a chosen count and range
-- Adjustable animation speed
-- Colours show unsorted, being compared and sorted elements
-- Time and space complexity shown for the selected algorithm
+**แท็บ Sorting**
+- Bubble Sort, Selection Sort, Insertion Sort และ Merge Sort
+- ใส่ตัวเลขเอง (สูงสุด 20 ตัว) หรือสุ่มข้อมูลโดยกำหนดจำนวนและช่วงค่า
+- ปรับความเร็วแอนิเมชันได้
+- สีบอกสถานะ: ยังไม่เรียง กำลังเปรียบเทียบ และเรียงเรียบร้อย
+- แสดงความซับซ้อนด้านเวลาและพื้นที่ของอัลกอริทึมที่เลือก
 
-**Searching tab**
-- Sequential Search and Binary Search
-- Binary Search sorts the data automatically first and highlights the current search range and midpoint
-- Counts comparisons and shows the found position in both the sorted and the original data
-- Summary window when the search finishes
+**แท็บ Searching**
+- Sequential Search และ Binary Search
+- Binary Search จะเรียงข้อมูลให้อัตโนมัติก่อน และไฮไลต์ช่วงค้นหากับตำแหน่งกลาง
+- นับจำนวนการเปรียบเทียบ และแสดงตำแหน่งที่พบทั้งในข้อมูลที่เรียงแล้วและข้อมูลต้นฉบับ
+- หน้าต่างสรุปผลเมื่อค้นหาเสร็จ
 
-## Complexity
+## ความซับซ้อน
 
-| Algorithm | Time (worst) | Space |
+| อัลกอริทึม | เวลา (กรณีแย่สุด) | พื้นที่ |
 |---|---|---|
 | Bubble Sort | O(n²) | O(1) |
 | Selection Sort | O(n²) | O(1) |
@@ -32,16 +32,16 @@ A Tkinter app that animates sorting and searching algorithms step by step as col
 | Sequential Search | O(n) | O(1) |
 | Binary Search | O(log n) | O(1) |
 
-## How the animation works
+## หลักการทำแอนิเมชัน
 
-Tkinter runs on a single event loop, so the app never sleeps inside a loop. Each algorithm is written as a step function that draws the current state and schedules the next step with `root.after(speed, ...)`, which keeps the window responsive while it animates.
+Tkinter ทำงานบน event loop เดียว โปรแกรมจึงไม่ใช้การหน่วงเวลาในลูป แต่เขียนแต่ละอัลกอริทึมเป็นฟังก์ชันทีละขั้น ที่วาดสถานะปัจจุบันแล้วนัดขั้นถัดไปด้วย `root.after(speed, ...)` ทำให้หน้าต่างยังตอบสนองได้ระหว่างแอนิเมชัน
 
-Merge Sort is recursive, so it is handled differently: the app first records every intermediate array state into a list of frames, then plays the frames back one by one.
+Merge Sort เป็นแบบ recursive จึงทำต่างออกไป: โปรแกรมบันทึกสถานะของอาร์เรย์ทุกขั้นลงในลิสต์ก่อน แล้วค่อยเล่นทีละเฟรม
 
-## Run
+## วิธีรัน
 
 ```bash
 python algorithms_visualizer.py
 ```
 
-Uses only the Python standard library (Tkinter, `random`).
+ใช้เฉพาะไลบรารีมาตรฐานของ Python (Tkinter, `random`)
