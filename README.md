@@ -1,11 +1,13 @@
 # Python Algorithm Visualizers
 
+**English** | [ภาษาไทย](README.th.md)
+
 Two desktop apps that turn classic algorithms into something you can watch and interact with, written in Python with Tkinter.
 
 | Project | What it does | Key algorithms | Type |
 |---|---|---|---|
-| [EV Eco-Routing](ev-eco-routing/) | Finds the route that uses the least battery between 7 provinces in southern Thailand and checks whether the current charge is enough | Dijkstra's shortest path with a priority queue (`heapq`) | Individual course project (2026) |
-| [Algorithms Visualizer](algorithms-visualizer/) | Animates sorting and searching step by step, with custom or random input, speed control and comparison counts | Bubble, Selection, Insertion, Merge Sort · Sequential and Binary Search | Team mini-project (2025) |
+| [EV Eco-Routing](ev-eco-routing/README.md) | Finds the route that uses the least battery between 7 provinces in southern Thailand and checks whether the current charge is enough | Dijkstra's shortest path with a priority queue (`heapq`) | Individual course project (2026) |
+| [Algorithms Visualizer](algorithms-visualizer/README.md) | Animates sorting and searching step by step, with custom or random input, speed control and comparison counts | Bubble, Selection, Insertion, Merge Sort · Sequential and Binary Search | Team mini-project (2025) |
 
 ![EV Eco-Routing: lowest-battery route from Trang to Narathiwat](docs/ev-route-trang-narathiwat.png)
 
@@ -40,6 +42,3 @@ python-algorithm-visualizers/
 
 Both projects come from the Data Structures & Algorithms course in the Computer Science program at Songkhla Rajabhat University. The interface text is in Thai; code and documentation are in English.
 
----
-
-ภาษาไทย: รวมโปรเจกต์ Python จากวิชาโครงสร้างข้อมูลและอัลกอริทึม ได้แก่ ระบบนำทางรถยนต์ไฟฟ้าประหยัดแบตเตอรี่ด้วย Dijkstra และโปรแกรมแสดงการทำงานของอัลกอริทึมเรียงลำดับและค้นหาข้อมูล (งานกลุ่ม)

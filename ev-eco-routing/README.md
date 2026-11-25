@@ -1,5 +1,7 @@
 # EV Eco-Routing
 
+**English** | [ภาษาไทย](README.th.md)
+
 A route planner for electric vehicles in the lower south of Thailand. Pick a start and destination province, set the current battery level, and the app finds the route that uses the least battery with Dijkstra's algorithm, then tells you whether you can make the trip without charging.
 
 ![Route from Trang to Narathiwat](../docs/ev-route-trang-narathiwat.png)

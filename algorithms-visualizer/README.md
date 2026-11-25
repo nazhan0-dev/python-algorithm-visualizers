@@ -1,5 +1,7 @@
 # Algorithms Visualizer: Sorting & Searching
 
+**English** | [ภาษาไทย](README.th.md)
+
 A Tkinter app that animates sorting and searching algorithms step by step as coloured bar charts, so you can see each comparison and swap as it happens.
 
 > Team mini-project for the Data Structures & Algorithms course (2025).
